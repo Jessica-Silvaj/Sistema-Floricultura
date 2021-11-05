@@ -137,6 +137,12 @@ public class TelaPrincipal extends JFrame {
 		menuNavegacao.add(ajuda);
 		
 		JMenuItem sobre = new JMenuItem("Sobre o sistema");
+		sobre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaSobre sobre = new TelaSobre();
+				sobre.setVisible(true);
+			}
+		});
 		sobre.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 15));
 		sobre.setHorizontalAlignment(SwingConstants.CENTER);
 		sobre.setSelected(true);
