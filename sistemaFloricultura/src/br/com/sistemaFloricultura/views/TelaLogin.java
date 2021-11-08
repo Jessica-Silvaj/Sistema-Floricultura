@@ -79,6 +79,7 @@ public class TelaLogin {
 					TelaPrincipal.textUsuario.setText(rs.getString(2));
 					TelaPrincipal.textUsuario.setForeground(Color.red);
 	                frmFlowerShopLogin.dispose();
+	                
 				} else  if (perfil.equals("Atendente")){
 					
 					TelaPrincipal principal =  new TelaPrincipal();

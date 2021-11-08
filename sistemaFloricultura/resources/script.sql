@@ -6,9 +6,9 @@ idfunc int auto_increment primary key,
 nomeFunc varchar(50) not null,
 fonefunc varchar(15), 
 emailfunc varchar(50),
-perfil varchar(20) not null,
 login varchar(15) not null unique,
-senha varchar(15) not null
+senha varchar(15) not null,
+perfil varchar(20) not null
 );
 
 create table  if not exists clientes(
