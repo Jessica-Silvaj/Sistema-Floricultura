@@ -69,11 +69,28 @@ public class TelaLogin {
 			rs = pst.executeQuery();
 			
 			if(rs.next()) {
-				TelaPrincipal principal =  new TelaPrincipal();
-				principal.setVisible(true);
-				frmFlowerShopLogin.dispose();
-				conexao.close();
 				
+				String perfil = rs.getString(7);
+				//System.out.print(perfil);
+				
+				if(perfil.equals("Administrador")) {
+					TelaPrincipal principal =  new TelaPrincipal();
+					principal.setVisible(true);
+					TelaPrincipal.textUsuario.setText(rs.getString(2));
+					TelaPrincipal.textUsuario.setForeground(Color.red);
+	                frmFlowerShopLogin.dispose();
+				} else  if (perfil.equals("Atendente")){
+					
+					TelaPrincipal principal =  new TelaPrincipal();
+					TelaPrincipal.textUsuario.setText(rs.getString(2));
+					TelaPrincipal.textUsuario.setForeground(Color.BLUE);
+					TelaPrincipal.relatorio.setEnabled(false);
+					TelaPrincipal.funcionarios.setEnabled(false);
+					principal.setVisible(true);
+					frmFlowerShopLogin.dispose();
+				}
+				
+				conexao.close();
 			} else {
 				JOptionPane.showMessageDialog(null, "O login e/ou  senha está inválido (s) ");
 			}

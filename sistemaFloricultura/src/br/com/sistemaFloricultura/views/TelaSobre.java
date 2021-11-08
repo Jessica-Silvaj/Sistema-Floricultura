@@ -1,17 +1,15 @@
 package br.com.sistemaFloricultura.views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.Toolkit;
 import javax.swing.JLabel;
-import java.awt.Font;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import java.awt.Color;
-import javax.swing.ImageIcon;
+import javax.swing.border.EmptyBorder;
 
 public class TelaSobre extends JFrame {
 
@@ -37,7 +35,8 @@ public class TelaSobre extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaSobre() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaSobre.class.getResource("/icons/flower.png")));
+		setResizable(false);
+		setAlwaysOnTop(true);
 		setTitle("Sobre o Sistema");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -82,4 +81,5 @@ public class TelaSobre extends JFrame {
 		lblNewLabel_4.setBounds(20, 165, 102, 25);
 		contentPane.add(lblNewLabel_4);
 	}
+
 }
