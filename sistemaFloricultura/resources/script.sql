@@ -14,6 +14,7 @@ perfil varchar(20) not null
 create table  if not exists clientes(
 idcli int auto_increment primary key,
 nomecli varchar(50) not null,
+cpfcli varchar(11) not null,
 endcli varchar(100),
 fonecli varchar(50)not null,
 emailcli varchar(50)
