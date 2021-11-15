@@ -53,7 +53,7 @@ public class TelaClientes extends JInternalFrame {
 	public void ligarConexao() {
 		conexao = ConexaoUtil.conector();
 	}
-	
+
 	private void AdicionarCli() {
 		String sql = "insert into clientes (nomecli ,cpfcli, endcli, fonecli ,emailcli) values (?,?,?,?,?)";
 
@@ -66,9 +66,8 @@ public class TelaClientes extends JInternalFrame {
 			pst.setString(4, textFoneCli.getText());
 			pst.setString(5, textEmailCli.getText());
 
-
-			if ((textCliente.getText().isEmpty()) || (textEndCli.getText().isEmpty()) ||(textCpf.getText().isEmpty())
-					|| (textFoneCli.getText().isEmpty()) || (textEmailCli.getText().isEmpty()) ) {
+			if ((textCliente.getText().isEmpty()) || (textEndCli.getText().isEmpty()) || (textCpf.getText().isEmpty())
+					|| (textFoneCli.getText().isEmpty()) || (textEmailCli.getText().isEmpty())) {
 				JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios");
 
 			} else {
@@ -87,7 +86,7 @@ public class TelaClientes extends JInternalFrame {
 			JOptionPane.showMessageDialog(null, e);
 		}
 	}
-	
+
 	private void consultarCli() {
 		String sql = "select * from clientes where cpfcli=?";
 
@@ -117,7 +116,7 @@ public class TelaClientes extends JInternalFrame {
 			JOptionPane.showMessageDialog(null, "Atenção! Esse cpf já existe no sistema, tente novamente! ");
 		}
 	}
-	
+
 	private void alterarCli() {
 		String sql = "update clientes set nomecli=?, endcli=? , fonecli=?, emailcli=? where cpfcli=? ";
 
@@ -129,22 +128,27 @@ public class TelaClientes extends JInternalFrame {
 			pst.setString(3, textFoneCli.getText());
 			pst.setString(4, textEmailCli.getText());
 			pst.setString(5, textCpf.getText());
-		;
+			;
 
 			if ((textCliente.getText().isEmpty()) || (textEndCli.getText().isEmpty())
-					|| (textFoneCli.getText().isEmpty())|| (textEmailCli.getText().isEmpty())) {
+					|| (textFoneCli.getText().isEmpty()) || (textEmailCli.getText().isEmpty())) {
 				JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios");
 
 			} else {
 
-				int adicionado = pst.executeUpdate();
-				if (adicionado > 0) {
-					JOptionPane.showMessageDialog(null, "O dados do clientes alterado com sucesso!");
-					textCliente.setText(null);
-					textEndCli.setText(null);
-					textFoneCli.setText(null);
-					textEmailCli.setText(null);
-	
+				int confirma = JOptionPane.showConfirmDialog(null, "Deseja alterar esse registro?", "Atenção!",
+						JOptionPane.YES_NO_OPTION);
+				if (confirma == JOptionPane.YES_OPTION) {
+
+					int adicionado = pst.executeUpdate();
+					if (adicionado > 0) {
+						JOptionPane.showMessageDialog(null, "O dados do clientes alterado com sucesso!");
+						textCliente.setText(null);
+						textEndCli.setText(null);
+						textFoneCli.setText(null);
+						textEmailCli.setText(null);
+
+					}
 				}
 			}
 
@@ -161,33 +165,32 @@ public class TelaClientes extends JInternalFrame {
 			String sql = "delete from clientes where cpfCli=?";
 
 			try {
-				
+
 				pst = conexao.prepareStatement(sql);
 				pst.setString(1, textCpf.getText());
 				int apagado = pst.executeUpdate();
-			    
-				if(apagado > 0) {
+
+				if (apagado > 0) {
 					JOptionPane.showMessageDialog(null, "Funcionario removido com sucesso!");
 					textCliente.setText(null);
 					textFoneCli.setText(null);
 					textEndCli.setText(null);
 					textEmailCli.setText(null);
-				} 
-				
-				
-				} catch (SQLException e) {
-					JOptionPane.showMessageDialog(null, e);
 				}
+
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(null, e);
 			}
 		}
-	
+	}
+
 	/**
 	 * Create the frame.
 	 */
 	public TelaClientes() {
-		
+
 		ligarConexao();
-		
+
 		setTitle("Cadastrar Cliente");
 		setFrameIcon(new ImageIcon(TelaClientes.class.getResource("/icons/clients.png")));
 		setMaximizable(true);
@@ -197,69 +200,69 @@ public class TelaClientes extends JInternalFrame {
 		setBackground(Color.WHITE);
 		setBounds(100, 100, 654, 450);
 		getContentPane().setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("Cadastramento de clientes");
 		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 26));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(136, 31, 367, 29);
 		getContentPane().add(lblNewLabel);
-		
+
 		JLabel lblNewLabel_7 = new JLabel("* Campos obrigat\u00F3rios");
 		lblNewLabel_7.setForeground(Color.BLACK);
 		lblNewLabel_7.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 18));
 		lblNewLabel_7.setBounds(458, 71, 182, 35);
 		getContentPane().add(lblNewLabel_7);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("* Nome do cliente:");
 		lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 20));
 		lblNewLabel_1.setBounds(26, 163, 157, 24);
 		getContentPane().add(lblNewLabel_1);
-		
+
 		textCliente = new JTextField();
 		textCliente.setBounds(193, 165, 406, 24);
 		getContentPane().add(textCliente);
 		textCliente.setColumns(10);
-		
+
 		JLabel lblNewLabel_1_1 = new JLabel("Endere\u00E7o:");
 		lblNewLabel_1_1.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 20));
 		lblNewLabel_1_1.setBounds(38, 233, 93, 24);
 		getContentPane().add(lblNewLabel_1_1);
-		
+
 		textEndCli = new JTextField();
 		textEndCli.setColumns(10);
 		textEndCli.setBounds(141, 235, 461, 24);
 		getContentPane().add(textEndCli);
-		
+
 		JLabel lblNewLabel_1_1_1 = new JLabel("E-mail:");
 		lblNewLabel_1_1_1.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 20));
 		lblNewLabel_1_1_1.setBounds(56, 198, 65, 24);
 		getContentPane().add(lblNewLabel_1_1_1);
-		
+
 		textEmailCli = new JTextField();
 		textEmailCli.setColumns(10);
 		textEmailCli.setBounds(131, 200, 468, 24);
 		getContentPane().add(textEmailCli);
-		
+
 		JLabel lblNewLabel_3 = new JLabel("* Telefone:");
 		lblNewLabel_3.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 20));
 		lblNewLabel_3.setBounds(41, 279, 100, 24);
 		getContentPane().add(lblNewLabel_3);
-		
+
 		textFoneCli = new JTextField();
 		textFoneCli.setColumns(10);
 		textFoneCli.setBounds(151, 280, 171, 27);
 		getContentPane().add(textFoneCli);
-		
+
 		JLabel lblNewLabel_3_1 = new JLabel("* Cpf:");
 		lblNewLabel_3_1.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 20));
 		lblNewLabel_3_1.setBounds(353, 279, 65, 24);
 		getContentPane().add(lblNewLabel_3_1);
-		
+
 		textCpf = new JTextField();
 		textCpf.setColumns(10);
 		textCpf.setBounds(428, 280, 171, 27);
 		getContentPane().add(textCpf);
-		
+
 		JButton btnAdicionarCli = new JButton("Adicionar");
 		btnAdicionarCli.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -272,7 +275,7 @@ public class TelaClientes extends JInternalFrame {
 		btnAdicionarCli.setBackground(SystemColor.menu);
 		btnAdicionarCli.setBounds(38, 364, 143, 23);
 		getContentPane().add(btnAdicionarCli);
-		
+
 		JButton btnConsultar = new JButton("Consultar");
 		btnConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -284,7 +287,7 @@ public class TelaClientes extends JInternalFrame {
 		btnConsultar.setBackground(SystemColor.menu);
 		btnConsultar.setBounds(208, 364, 134, 23);
 		getContentPane().add(btnConsultar);
-		
+
 		JButton btnAlterarCli = new JButton("Alterar");
 		btnAlterarCli.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -296,20 +299,20 @@ public class TelaClientes extends JInternalFrame {
 		btnAlterarCli.setBackground(SystemColor.menu);
 		btnAlterarCli.setBounds(352, 364, 137, 23);
 		getContentPane().add(btnAlterarCli);
-		
+
 		JButton btnDeletarCli = new JButton("Deletar");
 		btnDeletarCli.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			 deletarCli();
+				deletarCli();
 			}
-			
+
 		});
 		btnDeletarCli.setIcon(new ImageIcon(TelaClientes.class.getResource("/icons/delete.png")));
 		btnDeletarCli.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 17));
 		btnDeletarCli.setBackground(SystemColor.menu);
 		btnDeletarCli.setBounds(499, 364, 141, 23);
 		getContentPane().add(btnDeletarCli);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setIcon(new ImageIcon(TelaClientes.class.getResource("/icons/papeldeparede.jpg")));
 		lblNewLabel_2.setBounds(-114, -170, 929, 787);

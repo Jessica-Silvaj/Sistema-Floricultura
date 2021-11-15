@@ -239,44 +239,44 @@ public class TelaPrincipal extends JFrame {
 				desktop.add(prod);
 			}
 		});
-		
+
 		produtos.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icons/boxOne.png")));
 		cadastro.add(produtos);
-		
+
 		JMenu listagem = new JMenu("Listagem");
 		listagem.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 20));
 		listagem.setHorizontalAlignment(SwingConstants.CENTER);
 		menu.add(listagem);
-		
+
 		JMenuItem ltCli = new JMenuItem("Lista de clientes");
 		ltCli.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaListaCliente listaCli = new TelaListaCliente();
-			    listaCli.setVisible(true);
-			    desktop.add(listaCli);
+				listaCli.setVisible(true);
+				desktop.add(listaCli);
 			}
 		});
 		ltCli.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		listagem.add(ltCli);
-		
+
 		JMenuItem listFuncio = new JMenuItem("Lista de funcionarios");
 		listFuncio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				TelaListaFuncionarios listaFunc = new TelaListaFuncionarios();
 				listaFunc.setVisible(true);
-			    desktop.add(listaFunc);
+				desktop.add(listaFunc);
 			}
 		});
 		listFuncio.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		listagem.add(listFuncio);
-		
+
 		JMenuItem listProd = new JMenuItem("Lista de produtos");
 		listProd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaListaProdutos listaProd = new TelaListaProdutos();
 				listaProd.setVisible(true);
-			    desktop.add(listaProd);
+				desktop.add(listaProd);
 			}
 		});
 		listProd.setFont(new Font("Times New Roman", Font.PLAIN, 16));

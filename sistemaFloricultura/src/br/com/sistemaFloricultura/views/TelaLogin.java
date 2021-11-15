@@ -1,6 +1,16 @@
 package br.com.sistemaFloricultura.views;
 
+/**
+ * 
+ * Unime - União Metropolitana de Educação e Cultura Curso: Bacharelado em
+ * Sistemas de Informação Disciplina: Programação Orientada a Objetos II
+ * Professor(a): Pablo Ricardo Roxo Silva 
+ * Aluno(a): Jéssica Silva de Jesus
+ *
+ */
+
 import java.awt.EventQueue;
+
 
 import java.sql.*;
 import br.com.sistemaFloricultura.dataBase.*;

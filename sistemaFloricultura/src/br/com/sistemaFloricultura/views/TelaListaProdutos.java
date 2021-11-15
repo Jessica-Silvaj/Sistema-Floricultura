@@ -38,14 +38,14 @@ public class TelaListaProdutos extends JInternalFrame {
 		setTitle("Listar de Produtos");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("Tela em constru\u00E7\u00E3o");
 		lblNewLabel.setForeground(Color.RED);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 26));
 		lblNewLabel.setBounds(0, 75, 424, 61);
 		getContentPane().add(lblNewLabel);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setBounds(-81, -45, 699, 400);
 		getContentPane().add(lblNewLabel_1);

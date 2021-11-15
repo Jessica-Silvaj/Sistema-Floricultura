@@ -106,8 +106,9 @@ public class TelaFuncionarios extends JInternalFrame {
 			pst.setString(5, passwordSenha.getText());
 			pst.setString(6, cboPerfil.getSelectedItem().toString());
 
-			if ((textNomeFunc.getText().isEmpty()) || (textFone.getText().isEmpty()) || (textEmail.getText().isEmpty()) || (textLogin.getText().isEmpty())
-					|| (passwordSenha.getPassword().length == 0) || cboPerfil.getSelectedItem().equals(" ")) {
+			if ((textNomeFunc.getText().isEmpty()) || (textFone.getText().isEmpty()) || (textEmail.getText().isEmpty())
+					|| (textLogin.getText().isEmpty()) || (passwordSenha.getPassword().length == 0)
+					|| cboPerfil.getSelectedItem().equals(" ")) {
 				JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios");
 
 			} else {
@@ -146,17 +147,21 @@ public class TelaFuncionarios extends JInternalFrame {
 
 			} else {
 
-				int adicionado = pst.executeUpdate();
-				if (adicionado > 0) {
-					JOptionPane.showMessageDialog(null, "O dados do funcionario alterado com sucesso!");
-					textNomeFunc.setText(null);
-					textEmail.setText(null);
-					textFone.setText(null);
-					textLogin.setText(null);
-					passwordSenha.setText(null);
+				int confirma = JOptionPane.showConfirmDialog(null, "Deseja alterar esse registro?", "Atenção!",
+						JOptionPane.YES_NO_OPTION);
+				if (confirma == JOptionPane.YES_OPTION) {
+
+					int adicionado = pst.executeUpdate();
+					if (adicionado > 0) {
+						JOptionPane.showMessageDialog(null, "O dados do funcionario alterado com sucesso!");
+						textNomeFunc.setText(null);
+						textEmail.setText(null);
+						textFone.setText(null);
+						textLogin.setText(null);
+						passwordSenha.setText(null);
+					}
 				}
 			}
-			
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
@@ -171,25 +176,24 @@ public class TelaFuncionarios extends JInternalFrame {
 			String sql = "delete from funcionarios where login=?";
 
 			try {
-				
+
 				pst = conexao.prepareStatement(sql);
 				pst.setString(1, textLogin.getText());
 				int apagado = pst.executeUpdate();
-			    
-				if(apagado > 0) {
+
+				if (apagado > 0) {
 					JOptionPane.showMessageDialog(null, "Funcionario removido com sucesso!");
 					textNomeFunc.setText(null);
 					textEmail.setText(null);
 					textFone.setText(null);
 					textLogin.setText(null);
 					passwordSenha.setText(null);
-				} 
-				} catch (SQLException e) {
-					JOptionPane.showMessageDialog(null, e);
 				}
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(null, e);
 			}
 		}
-
+	}
 
 	/**
 	 * Create the frame.
@@ -271,7 +275,7 @@ public class TelaFuncionarios extends JInternalFrame {
 
 		cboPerfil = new JComboBox<String>();
 		cboPerfil.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 20));
-		cboPerfil.setModel(new DefaultComboBoxModel(new String[] {"Administrador", "Atendente"}));
+		cboPerfil.setModel(new DefaultComboBoxModel(new String[] { "Administrador", "Atendente" }));
 		cboPerfil.setSelectedIndex(0);
 		cboPerfil.setMaximumRowCount(2);
 		cboPerfil.setBounds(379, 182, 208, 28);
@@ -330,11 +334,11 @@ public class TelaFuncionarios extends JInternalFrame {
 		lblNewLabel_7.setForeground(Color.BLACK);
 		lblNewLabel_7.setBounds(428, 68, 182, 29);
 		getContentPane().add(lblNewLabel_7);
-		
+
 		JLabel lblNewLabel_8 = new JLabel("");
 		lblNewLabel_8.setBounds(-90, -112, 871, 503);
 		getContentPane().add(lblNewLabel_8);
-		
+
 		JLabel lblNewLabel_9 = new JLabel("");
 		lblNewLabel_9.setIcon(new ImageIcon(TelaFuncionarios.class.getResource("/icons/papeldeparede.jpg")));
 		lblNewLabel_9.setBounds(0, 0, 707, 526);
