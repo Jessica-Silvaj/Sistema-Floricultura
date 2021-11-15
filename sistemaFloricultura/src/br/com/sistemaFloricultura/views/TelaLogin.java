@@ -85,7 +85,6 @@ public class TelaLogin {
 					TelaPrincipal principal = new TelaPrincipal();
 					TelaPrincipal.textUsuario.setText(rs.getString(2));
 					TelaPrincipal.textUsuario.setForeground(Color.BLUE);
-					TelaPrincipal.relatorio.setEnabled(false);
 					TelaPrincipal.funcionarios.setEnabled(false);
 					principal.setVisible(true);
 					frmFlowerShopLogin.dispose();

@@ -19,6 +19,7 @@ import java.awt.SystemColor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -66,8 +67,8 @@ public class TelaClientes extends JInternalFrame {
 			pst.setString(5, textEmailCli.getText());
 
 
-			if ((textCliente.getText().isEmpty()) || (textCpf.getText().isEmpty())
-					|| (textFoneCli.getText().isEmpty())) {
+			if ((textCliente.getText().isEmpty()) || (textEndCli.getText().isEmpty()) ||(textCpf.getText().isEmpty())
+					|| (textFoneCli.getText().isEmpty()) || (textEmailCli.getText().isEmpty()) ) {
 				JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios");
 
 			} else {
@@ -86,6 +87,99 @@ public class TelaClientes extends JInternalFrame {
 			JOptionPane.showMessageDialog(null, e);
 		}
 	}
+	
+	private void consultarCli() {
+		String sql = "select * from clientes where cpfcli=?";
+
+		try {
+
+			pst = conexao.prepareStatement(sql);
+			pst.setString(1, textCpf.getText());
+			rs = pst.executeQuery();
+
+			if (rs.next()) {
+
+				textCliente.setText(rs.getString(2));
+				textEndCli.setText(rs.getString(4));
+				textFoneCli.setText(rs.getString(5));
+				textEmailCli.setText(rs.getString(6));
+
+			} else {
+				JOptionPane.showMessageDialog(null, "Não existe cliente com este cpf cadastrado!");
+				// textNomeFunc.setText(null);
+				textCliente.setText(null);
+				textEndCli.setText(null);
+				textFoneCli.setText(null);
+				textEmailCli.setText(null);
+			}
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Atenção! Esse cpf já existe no sistema, tente novamente! ");
+		}
+	}
+	
+	private void alterarCli() {
+		String sql = "update clientes set nomecli=?, endcli=? , fonecli=?, emailcli=? where cpfcli=? ";
+
+		try {
+
+			pst = conexao.prepareStatement(sql);
+			pst.setString(1, textCliente.getText());
+			pst.setString(2, textEndCli.getText());
+			pst.setString(3, textFoneCli.getText());
+			pst.setString(4, textEmailCli.getText());
+			pst.setString(5, textCpf.getText());
+		;
+
+			if ((textCliente.getText().isEmpty()) || (textEndCli.getText().isEmpty())
+					|| (textFoneCli.getText().isEmpty())|| (textEmailCli.getText().isEmpty())) {
+				JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios");
+
+			} else {
+
+				int adicionado = pst.executeUpdate();
+				if (adicionado > 0) {
+					JOptionPane.showMessageDialog(null, "O dados do clientes alterado com sucesso!");
+					textCliente.setText(null);
+					textEndCli.setText(null);
+					textFoneCli.setText(null);
+					textEmailCli.setText(null);
+	
+				}
+			}
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+
+	}
+
+	private void deletarCli() {
+		int confirma = JOptionPane.showConfirmDialog(null, "Confirma a exclusão deste usuário?", "Atenção!",
+				JOptionPane.YES_NO_OPTION);
+		if (confirma == JOptionPane.YES_OPTION) {
+			String sql = "delete from clientes where cpfCli=?";
+
+			try {
+				
+				pst = conexao.prepareStatement(sql);
+				pst.setString(1, textCpf.getText());
+				int apagado = pst.executeUpdate();
+			    
+				if(apagado > 0) {
+					JOptionPane.showMessageDialog(null, "Funcionario removido com sucesso!");
+					textCliente.setText(null);
+					textFoneCli.setText(null);
+					textEndCli.setText(null);
+					textEmailCli.setText(null);
+				} 
+				
+				
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		}
 	
 	/**
 	 * Create the frame.
@@ -107,13 +201,13 @@ public class TelaClientes extends JInternalFrame {
 		JLabel lblNewLabel = new JLabel("Cadastramento de clientes");
 		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 26));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(136, 39, 367, 21);
+		lblNewLabel.setBounds(136, 31, 367, 29);
 		getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_7 = new JLabel("* Campos obrigat\u00F3rios");
 		lblNewLabel_7.setForeground(Color.BLACK);
 		lblNewLabel_7.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 18));
-		lblNewLabel_7.setBounds(458, 71, 182, 29);
+		lblNewLabel_7.setBounds(458, 71, 182, 35);
 		getContentPane().add(lblNewLabel_7);
 		
 		JLabel lblNewLabel_1 = new JLabel("* Nome do cliente:");
@@ -180,6 +274,11 @@ public class TelaClientes extends JInternalFrame {
 		getContentPane().add(btnAdicionarCli);
 		
 		JButton btnConsultar = new JButton("Consultar");
+		btnConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				consultarCli();
+			}
+		});
 		btnConsultar.setIcon(new ImageIcon(TelaClientes.class.getResource("/icons/search.png")));
 		btnConsultar.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 17));
 		btnConsultar.setBackground(SystemColor.menu);
@@ -187,6 +286,11 @@ public class TelaClientes extends JInternalFrame {
 		getContentPane().add(btnConsultar);
 		
 		JButton btnAlterarCli = new JButton("Alterar");
+		btnAlterarCli.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				alterarCli();
+			}
+		});
 		btnAlterarCli.setIcon(new ImageIcon(TelaClientes.class.getResource("/icons/edit.png")));
 		btnAlterarCli.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 17));
 		btnAlterarCli.setBackground(SystemColor.menu);
@@ -194,6 +298,12 @@ public class TelaClientes extends JInternalFrame {
 		getContentPane().add(btnAlterarCli);
 		
 		JButton btnDeletarCli = new JButton("Deletar");
+		btnDeletarCli.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			 deletarCli();
+			}
+			
+		});
 		btnDeletarCli.setIcon(new ImageIcon(TelaClientes.class.getResource("/icons/delete.png")));
 		btnDeletarCli.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 17));
 		btnDeletarCli.setBackground(SystemColor.menu);
@@ -202,7 +312,7 @@ public class TelaClientes extends JInternalFrame {
 		
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setIcon(new ImageIcon(TelaClientes.class.getResource("/icons/papeldeparede.jpg")));
-		lblNewLabel_2.setBounds(-114, 0, 813, 617);
+		lblNewLabel_2.setBounds(-114, -170, 929, 787);
 		getContentPane().add(lblNewLabel_2);
 
 	}

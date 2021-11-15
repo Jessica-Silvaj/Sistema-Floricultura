@@ -35,8 +35,8 @@ import javax.swing.border.LineBorder;
 public class TelaPrincipal extends JFrame {
 	public static JTextField textUsuario;
 	private JTextField textData;
-	public static JMenu relatorio;
 	public static JMenuItem funcionarios;
+	public static JMenuItem listFuncio;
 
 	/**
 	 * Launch the application.
@@ -205,6 +205,7 @@ public class TelaPrincipal extends JFrame {
 		menu.add(cadastro);
 
 		JMenuItem clientes = new JMenuItem("Clientes");
+		clientes.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		clientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaClientes cli = new TelaClientes();
@@ -216,6 +217,7 @@ public class TelaPrincipal extends JFrame {
 		cadastro.add(clientes);
 
 		funcionarios = new JMenuItem("Funcionarios");
+		funcionarios.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		funcionarios.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icons/team20.png")));
 		funcionarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -228,21 +230,64 @@ public class TelaPrincipal extends JFrame {
 		// java.awt.event.InputEvent.ALT_MASK));
 		cadastro.add(funcionarios);
 
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Produtos");
-		cadastro.add(mntmNewMenuItem_2);
-
-		relatorio = new JMenu("Relat\u00F3rio");
-		relatorio.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		menu.add(relatorio);
-
-		JMenuItem Vendas = new JMenuItem("Vendas");
-		relatorio.add(Vendas);
+		JMenuItem produtos = new JMenuItem("Produtos");
+		produtos.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		produtos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaProdutos prod = new TelaProdutos();
+				prod.setVisible(true);
+				desktop.add(prod);
+			}
+		});
+		
+		produtos.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icons/boxOne.png")));
+		cadastro.add(produtos);
+		
+		JMenu listagem = new JMenu("Listagem");
+		listagem.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 20));
+		listagem.setHorizontalAlignment(SwingConstants.CENTER);
+		menu.add(listagem);
+		
+		JMenuItem ltCli = new JMenuItem("Lista de clientes");
+		ltCli.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaListaCliente listaCli = new TelaListaCliente();
+			    listaCli.setVisible(true);
+			    desktop.add(listaCli);
+			}
+		});
+		ltCli.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		listagem.add(ltCli);
+		
+		JMenuItem listFuncio = new JMenuItem("Lista de funcionarios");
+		listFuncio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				TelaListaFuncionarios listaFunc = new TelaListaFuncionarios();
+				listaFunc.setVisible(true);
+			    desktop.add(listaFunc);
+			}
+		});
+		listFuncio.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		listagem.add(listFuncio);
+		
+		JMenuItem listProd = new JMenuItem("Lista de produtos");
+		listProd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaListaProdutos listaProd = new TelaListaProdutos();
+				listaProd.setVisible(true);
+			    desktop.add(listaProd);
+			}
+		});
+		listProd.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		listagem.add(listProd);
 
 		JMenu ajuda = new JMenu("Ajuda");
 		ajuda.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		menu.add(ajuda);
 
 		JMenuItem sobre = new JMenuItem("Sobre");
+		sobre.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		sobre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 

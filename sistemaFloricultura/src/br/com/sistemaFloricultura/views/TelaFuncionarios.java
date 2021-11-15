@@ -106,7 +106,7 @@ public class TelaFuncionarios extends JInternalFrame {
 			pst.setString(5, passwordSenha.getText());
 			pst.setString(6, cboPerfil.getSelectedItem().toString());
 
-			if ((textNomeFunc.getText().isEmpty()) || (textLogin.getText().isEmpty())
+			if ((textNomeFunc.getText().isEmpty()) || (textFone.getText().isEmpty()) || (textEmail.getText().isEmpty()) || (textLogin.getText().isEmpty())
 					|| (passwordSenha.getPassword().length == 0) || cboPerfil.getSelectedItem().equals(" ")) {
 				JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios");
 
@@ -148,7 +148,7 @@ public class TelaFuncionarios extends JInternalFrame {
 
 				int adicionado = pst.executeUpdate();
 				if (adicionado > 0) {
-					JOptionPane.showMessageDialog(null, "Dado do funcionario alterado com sucesso!");
+					JOptionPane.showMessageDialog(null, "O dados do funcionario alterado com sucesso!");
 					textNomeFunc.setText(null);
 					textEmail.setText(null);
 					textFone.setText(null);
@@ -156,6 +156,7 @@ public class TelaFuncionarios extends JInternalFrame {
 					passwordSenha.setText(null);
 				}
 			}
+			
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
@@ -183,7 +184,6 @@ public class TelaFuncionarios extends JInternalFrame {
 					textLogin.setText(null);
 					passwordSenha.setText(null);
 				} 
-				
 				} catch (SQLException e) {
 					JOptionPane.showMessageDialog(null, e);
 				}
@@ -212,7 +212,7 @@ public class TelaFuncionarios extends JInternalFrame {
 		JLabel lblNewLabel = new JLabel("Cadastramento de Funcionarios");
 		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 26));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(90, 33, 400, 24);
+		lblNewLabel.setBounds(90, 27, 400, 30);
 		getContentPane().add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("* Nome do funcionario:");
@@ -225,23 +225,23 @@ public class TelaFuncionarios extends JInternalFrame {
 		getContentPane().add(textNomeFunc);
 		textNomeFunc.setColumns(10);
 
-		JLabel lblNewLabel_2 = new JLabel("E-mail:");
+		JLabel lblNewLabel_2 = new JLabel("* E-mail:");
 		lblNewLabel_2.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 20));
-		lblNewLabel_2.setBounds(25, 143, 78, 30);
+		lblNewLabel_2.setBounds(25, 143, 89, 30);
 		getContentPane().add(lblNewLabel_2);
 
 		textEmail = new JTextField();
-		textEmail.setBounds(113, 143, 461, 27);
+		textEmail.setBounds(124, 143, 461, 27);
 		getContentPane().add(textEmail);
 		textEmail.setColumns(10);
 
-		JLabel lblNewLabel_3 = new JLabel("Telefone:");
+		JLabel lblNewLabel_3 = new JLabel("* Telefone:");
 		lblNewLabel_3.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 20));
-		lblNewLabel_3.setBounds(25, 184, 90, 24);
+		lblNewLabel_3.setBounds(25, 184, 95, 24);
 		getContentPane().add(lblNewLabel_3);
 
 		textFone = new JTextField();
-		textFone.setBounds(113, 181, 171, 27);
+		textFone.setBounds(124, 181, 171, 27);
 		getContentPane().add(textFone);
 		textFone.setColumns(10);
 
@@ -332,7 +332,7 @@ public class TelaFuncionarios extends JInternalFrame {
 		getContentPane().add(lblNewLabel_7);
 		
 		JLabel lblNewLabel_8 = new JLabel("");
-		lblNewLabel_8.setBounds(0, 0, 638, 391);
+		lblNewLabel_8.setBounds(-90, -112, 871, 503);
 		getContentPane().add(lblNewLabel_8);
 		
 		JLabel lblNewLabel_9 = new JLabel("");
