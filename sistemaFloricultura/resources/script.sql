@@ -30,26 +30,13 @@ descricao varchar(50)not null
 
 
 --- revisar e criar tabela vendas
-create table if not exists vendas(
-idvend int auto_increment primary key,
-data_vendas timestamp default current_timestamp,
-idcli int not null,
-iduser int not null,
-idprod int not null,
-foreign key(idcli) references funcionarios(idcli),
-foreign key(iduser) references usuarios(iduser),
-foreign key(idprod) references produtos(idprod)
-);
-
-
-
--- Trazer informações de ordem de serviços
-
-SELECT O.data_os,
-C.nomecli, C.endcli,C. fonecli,
-U.usuario,
-P.nomeprod, P.precoprod, P.dimensao, P.descricao
-FROM ordemservicos as O
-inner join clientes as C on (O.idcli = C.idcli)
-inner join usuarios as U on (O.iduser = U.iduser)
-inner join produtos as P on (O.idprod = p.idprod);
+--create table if not exists vendas(
+--idvend int auto_increment primary key,
+--data_vendas timestamp default current_timestamp,
+--idcli int not null,
+--iduser int not null,
+--idprod int not null,
+--foreign key(idcli) references funcionarios(idcli),
+--foreign key(iduser) references usuarios(iduser),
+--foreign key(idprod) references produtos(idprod)
+--);
